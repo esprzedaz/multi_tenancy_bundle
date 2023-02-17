@@ -64,13 +64,15 @@ class TenantConnection extends Connection
     }
 
     /**
+     * @param string $dbHost
      * @param string $dbName
      * @param string $dbUser
      * @param string|null $dbPassword
      * @return TenantConnection
      */
-    public function changeParams(string $dbName, string $dbUser, ?string $dbPassword): self
+    public function changeParams(string $dbHost, string $dbName, string $dbUser, ?string $dbPassword): self
     {
+        $this->params['host'] = $dbHost;
         $this->params['dbname'] = $dbName;
         $this->params['user'] = $dbUser;
         $this->params['password'] = $dbPassword;
@@ -92,7 +94,7 @@ class TenantConnection extends Connection
     /**
      * @return mixed|array
      */
-    public function getParams()
+    public function getParams(): mixed
     {
         return $this->params;
     }

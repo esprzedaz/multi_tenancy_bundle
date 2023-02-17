@@ -25,4 +25,10 @@ Interface TenantDbConfigurationInterface
      * @return string|null
      */
     public function getDbPassword(): ?string;
+
+    /**
+     * Tenant database host
+     * @return string
+     */
+    public function getDbHost(): string;
 }
