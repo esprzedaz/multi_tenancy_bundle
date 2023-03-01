@@ -4,8 +4,10 @@
 namespace Hakam\MultiTenancyBundle\Services;
 
 
+
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
+use Hakam\MultiTenancyBundle\Entity\Tenant;
 use LogicException;
 use RuntimeException;
 
@@ -31,7 +33,15 @@ class DbConfigService
 
     public function findDbConfig(string $identifier): TenantDbConfigurationInterface
     {
-        $dbConfigObject = $this->entityRepository->findOneBy([$this->dbIdentifier => $identifier]);
+        if('dev' === $identifier && 'dev' === $_ENV['APP_ENV']){
+            $dbConfigObject = new Tenant();
+            $dbConfigObject->setDbHost($_ENV['DEV_DATABASE_HOST']);
+            $dbConfigObject->setDbName($_ENV['DEV_DATABASE_NAME']);
+            $dbConfigObject->setDbUserName($_ENV['DEV_DATABASE_USERNAME']);
+            $dbConfigObject->setDbPassword($_ENV['DEV_DATABASE_PASSWORD']);
+        }else {
+            $dbConfigObject = $this->entityRepository->findOneBy([$this->dbIdentifier => $identifier]);
+        }
         if( $dbConfigObject === null )
         {
             throw new RuntimeException(sprintf(
