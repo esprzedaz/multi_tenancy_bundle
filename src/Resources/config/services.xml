@@ -10,11 +10,13 @@
             <argument  key="$dbIdentifier" type="string" id="id"/>
         </service>
         <service id="Hakam\MultiTenancyBundle\Services\DbConfigService" alias="hakam_db_config.service"/>
+        <service id="Hakam\MultiTenancyBundle\Services\TenantContext" class="Hakam\MultiTenancyBundle\Services\TenantContext"/>
+
         <service id="Hakam\MultiTenancyBundle\EventListener\DbSwitchEventListener">
             <tag name="kernel.event_listener" event= "Hakam\MultiTenancyBundle\Event\SwitchDbEvent" />
             <argument type="service" id="service_container"/>
             <argument type="service" id="hakam_db_config.service"/>
-            <argument type="service" id="App\Service\TenantContext"/>
+            <argument type="service" id="Hakam\MultiTenancyBundle\Services\TenantContext"/>
         </service>
 
         <service id="Hakam\MultiTenancyBundle\Command\DiffCommand">
