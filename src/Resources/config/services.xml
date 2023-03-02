@@ -14,6 +14,7 @@
             <tag name="kernel.event_listener" event= "Hakam\MultiTenancyBundle\Event\SwitchDbEvent" />
             <argument type="service" id="service_container"/>
             <argument type="service" id="hakam_db_config.service"/>
+            <argument type="service" id="App\Service\TenantContext"/>
         </service>
 
         <service id="Hakam\MultiTenancyBundle\Command\DiffCommand">

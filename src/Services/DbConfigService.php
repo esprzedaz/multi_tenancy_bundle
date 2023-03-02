@@ -35,6 +35,7 @@ class DbConfigService
     {
         if('dev' === $identifier && 'dev' === $_ENV['APP_ENV']){
             $dbConfigObject = new Tenant();
+            $dbConfigObject->setKey('dev');
             $dbConfigObject->setDbHost($_ENV['DEV_DATABASE_HOST']);
             $dbConfigObject->setDbName($_ENV['DEV_DATABASE_NAME']);
             $dbConfigObject->setDbUserName($_ENV['DEV_DATABASE_USERNAME']);
